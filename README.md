@@ -1,4 +1,4 @@
-# Estacionamento Inteligente Visite 2024 ETEC FERNSNDO PRESTES
+# Estacionamento Inteligente 
 
 ## ETEC Fernando Prestes - Extensão FATEC
 **Curso:** Desenvolvimento de Sistemas  
