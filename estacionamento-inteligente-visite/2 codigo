@@ -1,0 +1,75 @@
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+#include <Servo.h>
+
+LiquidCrystal_I2C lcd(0x27,16,2); 
+Servo servo;
+
+const int IR1 = 2; 
+const int IR2 = 3; 
+int vagas = 4;    
+
+bool flag1 = false;
+bool flag2 = false;
+
+void setup() {
+    Serial.begin(9600);
+    lcd.init(); 
+    lcd.backlight(); 
+
+    pinMode(IR1, INPUT);
+    pinMode(IR2, INPUT);
+
+    servo.attach(4);
+    servo.write(100); 
+
+  
+    lcd.setCursor(0,0);
+    lcd.print(" Garage Club ");
+    lcd.setCursor(0,1);
+    lcd.print(" ESTACIONAMENTO ");
+    delay(2000);
+    lcd.clear();
+}
+
+void loop() {
+    if(digitalRead(IR1) == LOW && !flag1) {
+        if(vagas > 0) { 
+            flag1 = true;
+            if(!flag2) { 
+                servo.write(0); 
+                vagas--; 
+            }
+        } else {
+            
+            lcd.setCursor(0,0);
+            lcd.print(" ESTACIONAMENTO ");
+            lcd.setCursor(0,1);
+            lcd.print("   LOTADO :(    ");
+            delay(3000);
+            lcd.clear();
+        }
+    }
+
+    if(digitalRead(IR2) == LOW && !flag2) {
+        flag2 = true;
+        if(!flag1) {
+            servo.write(0); 
+            vagas++; 
+        }
+    }
+
+    if(flag1 && flag2) {
+        delay(1000);
+        servo.write(100); 
+        flag1 = false;
+        flag2 = false;
+    }
+
+
+    lcd.setCursor(0,0);
+    lcd.print(" BEM-VINDO! ");
+    lcd.setCursor(0,1);
+    lcd.print("Vagas Livres: ");
+    lcd.print(vagas);
+}
