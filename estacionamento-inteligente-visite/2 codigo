@@ -7,7 +7,7 @@ Servo servo;
 
 const int IR1 = 2; 
 const int IR2 = 3; 
-int vagas = 4;    
+int vagas =5;    
 
 bool flag1 = false;
 bool flag2 = false;
@@ -23,7 +23,6 @@ void setup() {
     servo.attach(4);
     servo.write(100); 
 
-  
     lcd.setCursor(0,0);
     lcd.print(" Garage Club ");
     lcd.setCursor(0,1);
@@ -36,12 +35,12 @@ void loop() {
     if(digitalRead(IR1) == LOW && !flag1) {
         if(vagas > 0) { 
             flag1 = true;
-            if(!flag2) { 
+            if(!flag2) {
+                delay(1000);
                 servo.write(0); 
                 vagas--; 
             }
         } else {
-            
             lcd.setCursor(0,0);
             lcd.print(" ESTACIONAMENTO ");
             lcd.setCursor(0,1);
@@ -54,6 +53,7 @@ void loop() {
     if(digitalRead(IR2) == LOW && !flag2) {
         flag2 = true;
         if(!flag1) {
+            delay(1000);
             servo.write(0); 
             vagas++; 
         }
@@ -65,7 +65,6 @@ void loop() {
         flag1 = false;
         flag2 = false;
     }
-
 
     lcd.setCursor(0,0);
     lcd.print(" BEM-VINDO! ");
