@@ -5,8 +5,8 @@
 **Local:** Sorocaba - SP  
 
 **Integrantes da Equipe:**
+- **Jones Henrique Branco Sandri**
 - **Leonardo Martins Brasilio**
-- **Jones Henrique Branco Sandrini**
 - **Pedro Henrique Menezes Bernardo**
 
 ---
